@@ -22,20 +22,27 @@
         const form = document.querySelector("form")
 
         var ws = new WebSocket('ws://127.0.0.1:8080')
+        var lastMessage
 
         ws.addEventListener("message", ev => {
             const data = document.createElement("span")
             data.innerHTML = ev.data
-            display.append(data)
+            if (ev.data == lastMessage) {
+                data.classList.add('myMessage')
+                display.append(data)
+            } else {
+                display.append(data)
+            }
+            // display.scrollTop = display.scrollHeight
         })
-
+        
 
         form.addEventListener("submit", ev => {
             ev.preventDefault()
+            lastMessage = form.msg.value
             ws.send(form.msg.value)
             form.msg.value = ""
         })
-
     </script>
 </body>
 </html>

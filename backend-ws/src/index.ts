@@ -12,6 +12,5 @@ wss.on('connection', ws => {
       cws.send(data.toString())
     })
   })
-
-  ws.send('Hello darling, how are you doing?')
+  
 })
